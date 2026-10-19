@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKM Interaktif: Current Electricity</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+        body {
+            background: #f5f9fe;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .worksheet {
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 12px 30px rgba(0, 20, 50, 0.1);
+            padding: 30px 35px;
+            border: 1px solid #cdddec;
+        }
+        h1 {
+            font-size: 1.7rem;
+            color: #0b2b4a;
+            margin-top: 0;
+            margin-bottom: 10px;
+            border-left: 8px solid #1e88e5;
+            padding-left: 18px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+        h2 {
+            font-size: 1.3rem;
+            color: #163a5f;
+            margin-top: 28px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #b8d4f0;
+            padding-bottom: 6px;
+            font-weight: 600;
+        }
+        h3 {
+            font-size: 1.1rem;
+            color: #1e4a7a;
+            margin: 15px 0 8px 0;
+            font-weight: 600;
+        }
+        .group-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px 30px;
+            background: #e9f2fa;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #0b2b4a;
+        }
+        .group-info span {
+            display: inline-block;
+        }
+        .member-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            align-items: center;
+            margin-top: 5px;
+        }
+        .member-list input {
+            width: 180px;
+            padding: 6px 10px;
+            border: 1px solid #b8cfe0;
+            border-radius: 20px;
+            background: white;
+            font-size: 0.95rem;
+            margin: 0 5px 0 0;
+            transition: 0.2s;
+        }
+        input, textarea {
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+        input:focus, textarea:focus {
+            outline: 2px solid #1e88e5;
+            border-color: #1e88e5;
+            background: #fefeff;
+        }
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cdddec;
+            border-radius: 18px;
+            background: #ffffff;
+            resize: vertical;
+            line-height: 1.5;
+            font-family: inherit;
+        }
+        .field-block {
+            background: #f7fafd;
+            border-radius: 22px;
+            padding: 12px 18px;
+            margin: 18px 0;
+            border: 1px solid #d9e6f2;
+        }
+        .field-block label {
+            font-weight: 600;
+            color: #1e4a7a;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        .tool-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 25px;
+            background: #eef5fc;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            color: #143e61;
+            margin: 10px 0 5px;
+        }
+        .steps {
+            padding-left: 20px;
+            margin: 12px 0;
+            color: #1f3e5c;
+            line-height: 1.7;
+        }
+        .steps li {
+            margin-bottom: 6px;
+        }
+        .assumption-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin: 12px 0;
+        }
+        .assumption-item {
+            background: #f3f9ff;
+            padding: 12px 18px;
+            border-radius: 22px;
+            border-left: 6px solid #f9a825;
+        }
+        .assumption-item p {
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            color: #1a466b;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18px 0;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+        th {
+            background: #1e4a7a;
+            color: white;
+            font-weight: 600;
+            padding: 14px 10px;
+            font-size: 1rem;
+        }
+        td {
+            padding: 12px 10px;
+            border: 1px solid #cbdae8;
+            background: white;
+            vertical-align: middle;
+        }
+        td:first-child {
+            font-weight: 600;
+            background: #f0f7ff;
+            color: #143e61;
+            width: 24%;
+        }
+        td input, td textarea {
+            width: 100%;
+            border: 1px solid #cbdae8;
+            border-radius: 12px;
+            padding: 8px 12px;
+            background: #ffffff;
+            font-family: inherit;
+        }
+        td textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+        .question-item {
+            background: #f8fcff;
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border: 1px solid #d0e2f2;
+        }
+        .question-item label {
+            font-weight: 600;
+            color: #0b2b4a;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+        .two-col {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        .two-col > div {
+            flex: 1;
+            min-width: 200px;
+        }
+        .conclusion-box {
+            background: #e3f0fd;
+            border-radius: 24px;
+            padding: 20px 25px;
+            margin: 15px 0;
+        }
+        .conclusion-box label {
+            font-weight: 600;
+            color: #1e4a7a;
+            font-size: 1.05rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .conclusion-box textarea {
+            background: white;
+            border: 1px solid #b8d4f0;
+        }
+        button {
+            background: #1e88e5;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(30, 136, 229, 0.3);
+            transition: 0.2s;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        button:hover {
+            background: #0d6eb8;
+            transform: scale(1.01);
+        }
+        button:active {
+            background: #0a4f83;
+        }
+        .note {
+            font-size: 0.9rem;
+            color: #4f6f8f;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        .sim-link {
+            background: #ffffff;
+            border-radius: 40px;
+            padding: 8px 18px;
+            display: inline-block;
+            border: 1px solid #b8d4f0;
+            color: #0b5e9e;
+            font-weight: 500;
+            text-decoration: none;
+            margin: 5px 0;
+        }
+        .sim-link:hover {
+            background: #e3f0fd;
+        }
+        .inline-code {
+            background: #eef2f6;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #164a7a;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #cbdae8, transparent);
+            margin: 24px 0 10px;
+        }
+        @media (max-width: 700px) {
+            .worksheet {
+                padding: 20px;
+            }
+            .group-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .member-list input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="worksheet">
+    <h1>⚡ LKM – Current Electricity</h1>
+
+    <!-- Identitas -->
+    <div class="group-info">
+        <span><strong>Group</strong> : <input type="text" placeholder="Group name" style="width:140px; padding:5px 10px; border-radius:20px; border:1px solid #b8cfe0;"></span>
+        <span><strong>Class / Date</strong> : <input type="text" placeholder="Class" style="width:80px;"> / <input type="text" placeholder="Date" style="width:120px;"></span>
+    </div>
+    <div style="margin-bottom:10px; font-weight:500; color:#0b2b4a;">Member :</div>
+    <div class="member-list">
+        <span>1) <input type="text" placeholder="Member 1"></span>
+        <span>2) <input type="text" placeholder="Member 2"></span>
+        <span>3) <input type="text" placeholder="Member 3"></span>
+        <span>4) <input type="text" placeholder="Member 4"></span>
+    </div>
+
+    <!-- A. Title -->
+    <h2>A. Title</h2>
+    <p style="font-size:1.05rem; font-weight:500; background:#e9f2fa; padding:10px 18px; border-radius:40px; display:inline-block;">
+        Investigate Condition Turn it on Lights and Their Connections with Current Electricity
+    </p>
+
+    <!-- B. Objectives -->
+    <h2>B. Objectives</h2>
+    <ol style="line-height:1.8; color:#1f3e5c; font-weight:500;">
+        <li>Investigate conditions required for the lamp to work light up through simulation series electricity.</li>
+        <li>Identifying difference series open and circuit closed.</li>
+        <li>Explain connection between flow cargo electricity and lights on.</li>
+        <li>Count strong current electricity based on amount load and time.</li>
+    </ol>
+
+    <!-- C. Tools and Materials -->
+    <h2>C. Tools and Materials</h2>
+    <div class="tool-list">
+        <span>💻 Laptop or computer</span>
+        <span>🔬 Simulation PhET Colorado – <a href="https://phet.colorado.edu/en/simulations/circuit-construction-kit-dc" target="_blank" class="sim-link">Circuit Construction Kit: DC</a></span>
+        <span>📄 Sheet student work</span>
+        <span>✏️ Tool write</span>
+    </div>
+
+    <!-- D. Steps Activity -->
+    <h2>D. Steps Activity</h2>
+    <ol class="steps">
+        <li>Open simulation PhET Circuit Construction Kit: DC through available links.</li>
+        <li>Choose possible display You compile series electricity simple.</li>
+        <li>Arrange a series consisting of on One battery, one lights and cables connector until form series closed.</li>
+        <li>Observe the conditions lights and movement cargo electricity displayed in the simulation.</li>
+        <li>Note results observations in the available table.</li>
+        <li>Release one of them cable so that series become open.</li>
+        <li>Observe the changes condition lights and flow cargo electricity.</li>
+        <li>Connect return the cable is removed, then observe changes that occur.</li>
+        <li>Discuss results observation together member group and answer questions in section G.</li>
+    </ol>
+
+    <!-- E. Initial Assumption -->
+    <h2>E. Initial Assumption</h2>
+    <div class="assumption-grid">
+        <div class="assumption-item">
+            <p>🔹 What conditions for the lights light up?</p>
+            <textarea rows="2" placeholder="Write your initial assumption..."></textarea>
+        </div>
+        <div class="assumption-item">
+            <p>🔹 What happens to the load electricity when series closed?</p>
+            <textarea rows="2" placeholder="Write your initial assumption..."></textarea>
+        </div>
+        <div class="assumption-item">
+            <p>🔹 How condition lights and flow cargo when one of cable released?</p>
+            <textarea rows="2" placeholder="Write your initial assumption..."></textarea>
+        </div>
+    </div>
+
+    <!-- F. Table Observation -->
+    <h2>F. Table Observation</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Condition Series</th>
+                <th>Observation on the Light</th>
+                <th>Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Series closed (complete)</td>
+                <td><textarea rows="2" placeholder="Describe observation..."></textarea></td>
+                <td><textarea rows="2" placeholder="Information..."></textarea></td>
+            </tr>
+            <tr>
+                <td>Series open (one cable released)</td>
+                <td><textarea rows="2" placeholder="Describe observation..."></textarea></td>
+                <td><textarea rows="2" placeholder="Information..."></textarea></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- G. Space Discussion and Questions (with answer fields) -->
+    <h2>G. Space Discussion and Questions</h2>
+
+    <div class="question-item">
+        <label>1. In the condition series like What light light up?</label>
+        <textarea rows="2" placeholder="Your answer..."></textarea>
+    </div>
+
+    <div class="question-item">
+        <label>2. Why series electricity must closed so that the lights can light up?</label>
+        <textarea rows="2" placeholder="Your answer..."></textarea>
+    </div>
+
+    <div class="question-item">
+        <label>3. Based on results simulation, explain understanding current electricity with your language Alone.</label>
+        <textarea rows="2" placeholder="Your answer..."></textarea>
+    </div>
+
+    <div class="question-item">
+        <label>4. If cargo electricity by 6 C through something point in series for 2 s, count it strong current the electricity.</label>
+        <textarea rows="2" placeholder="Show your calculation and answer..."></textarea>
+    </div>
+
+    <!-- H. Conclusion (the original has G. Conclusion, but we label as H to avoid confusion; actually original had G twice, but we'll keep as H for clarity) -->
+    <h2>H. Conclusion</h2>
+    <div class="conclusion-box">
+        <label>Write it down two sentences that explain understanding current electricity and the conditions necessary for the current to flow electricity can flow in series.</label>
+        <textarea rows="4" placeholder="Write your conclusion here..."></textarea>
+    </div>
+
+    <!-- Optional interactive button (non-functional placeholder, just for engagement) -->
+    <div style="display:flex; justify-content: flex-end;">
+        <button onclick="alert('✅ Worksheet ready! Your answers are stored in the fields. (This is a static interactive sheet – no data is sent.)')">💡 Check Worksheet</button>
+    </div>
+    <div class="note">This is an interactive worksheet. Fill in the fields and discuss with your group. The simulation link opens in a new tab.</div>
+</div>
+
+<!-- No actual data submission, just a simple static page with interactive form fields -->
+</body>
+</html>
